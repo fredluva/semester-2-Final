@@ -7,9 +7,9 @@ public class PlayerController : MonoBehaviour
     public float speed = 5;
     Rigidbody2D rb2D;
     float horizontal;
-    
-
-    Animator ani;
+    float vertical;
+    private bool FacingRight = true;
+    public  Animator ani;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,8 +20,11 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        vertical = Input.GetAxis("Vertical");
         horizontal = Input.GetAxis("Horizontal");
-        
+        Vector2 move = new Vector2(horizontal, vertical);
+       
+        ani.SetFloat("Speed", move.magnitude);
 
     }
 
@@ -31,5 +34,27 @@ public class PlayerController : MonoBehaviour
         position.x = position.x + speed * horizontal * Time.deltaTime;
 
         rb2D.MovePosition(position);
+
+        if (horizontal < 0 && FacingRight)
+        {
+            flip();
+        }
+        if (horizontal > 0 && !FacingRight)
+        {
+            flip();
+        }
+       
+            
+
+
     }
+
+    private void flip()
+    {
+        FacingRight = !FacingRight;
+        transform.Rotate(0f, 180f, 0f);
+    }
+
+
+  
 }
