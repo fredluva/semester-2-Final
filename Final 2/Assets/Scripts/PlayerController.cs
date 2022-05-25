@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     float vertical;
     private bool FacingRight = true;
     public  Animator ani;
+    public float jumpHeight;
     // Start is called before the first frame update
     void Start()
     {
@@ -26,6 +27,10 @@ public class PlayerController : MonoBehaviour
        
         ani.SetFloat("Speed", move.magnitude);
 
+        if (Input.GetKeyDown(KeyCode.Z))
+        {
+            Jump();
+        }
     }
 
     private void FixedUpdate()
@@ -43,10 +48,12 @@ public class PlayerController : MonoBehaviour
         {
             flip();
         }
-       
-            
 
+    }
 
+    void Jump()
+    {
+        rb2D.velocity = Vector2.up * jumpHeight; 
     }
 
     private void flip()
@@ -55,6 +62,4 @@ public class PlayerController : MonoBehaviour
         transform.Rotate(0f, 180f, 0f);
     }
 
-
-  
 }
