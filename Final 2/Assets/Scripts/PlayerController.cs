@@ -12,7 +12,7 @@ public class PlayerController : MonoBehaviour
     private bool FacingRight = true;
     public  Animator ani;
     private bool isDead = false;
-   
+    private bool Win = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -70,6 +70,14 @@ public class PlayerController : MonoBehaviour
             isDead = true;
             rb2D.velocity = Vector2.zero;
             GameController.instance.PlayerDied();
+
+        }
+
+        if (collision.gameObject.tag == "wingame")
+        {
+            Win = true;
+            GameController.instance.PlayerWin();
+            rb2D.velocity = Vector2.zero;
         }
         
     }

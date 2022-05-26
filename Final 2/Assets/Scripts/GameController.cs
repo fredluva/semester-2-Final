@@ -7,6 +7,8 @@ public class GameController : MonoBehaviour
     public static GameController instance;
     public bool gameOver = false;
     public GameObject gameOverText;
+    public bool gameWin = false;
+    public GameObject gameWinText;
     // Start is called before the first frame update
     void Awake()
     {
@@ -26,6 +28,12 @@ public class GameController : MonoBehaviour
         gameOver = true;
     }
 
+
+    public void PlayerWin()
+    {
+        gameWinText.SetActive(true);
+        gameWin = true;
+    }
     // Update is called once per frame
     void Update()
     {
