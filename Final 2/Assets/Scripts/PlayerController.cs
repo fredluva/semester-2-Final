@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public float speed = 5;
+    public float JumpForce = 1;
     Rigidbody2D rb2D;
     float horizontal;
     float vertical;
@@ -21,20 +22,24 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        vertical = Input.GetAxis("Vertical");
+      
         horizontal = Input.GetAxis("Horizontal");
+        vertical = Input.GetAxis("Vertical");
         Vector2 move = new Vector2(horizontal, vertical);
        
         ani.SetFloat("Speed", move.magnitude);
 
-        
+
+      
+
     }
 
 
     private void FixedUpdate()
     {
         Vector2 position = rb2D.position;
-        position.x = position.x + speed * horizontal * Time.deltaTime;
+        position.x = position.x + speed * horizontal * Time.deltaTime * 1.5f;
+        position.y = position.y + vertical - Time.deltaTime * 5;
 
         rb2D.MovePosition(position);
 
