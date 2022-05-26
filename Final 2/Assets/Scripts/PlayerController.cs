@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
     float vertical;
     private bool FacingRight = true;
     public  Animator ani;
+    private bool isDead = false;
    
     // Start is called before the first frame update
     void Start()
@@ -60,6 +61,17 @@ public class PlayerController : MonoBehaviour
     {
         FacingRight = !FacingRight;
         transform.Rotate(0f, 180f, 0f);
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "death")
+        {
+            isDead = true;
+            rb2D.velocity = Vector2.zero;
+            GameController.instance.PlayerDied();
+        }
+        
     }
 
 }

@@ -6,6 +6,7 @@ TagManager:
   tags:
   - grabable
   - grabbable
+  - death
   layers:
   - Default
   - TransparentFX
